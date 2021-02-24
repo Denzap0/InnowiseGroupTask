@@ -117,7 +117,7 @@ class WeatherForecastAdapter() :
             }
             timeTextView.text = timeSimpleDateFormat.format(Date(oneCallWeatherUi.time))
             mainDescriptionTextView.text = oneCallWeatherUi.mainDescription
-            temperatureTextView.text = oneCallWeatherUi.temperature.toString() + "°C"
+            temperatureTextView.text = "${oneCallWeatherUi.temperature}°C"
         }
 
         private fun initMainViews() {

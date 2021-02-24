@@ -92,10 +92,10 @@ class TodayWeatherFragment() : Fragment(), TodayWeatherFragmentListener {
             "Fog" -> mainDescriptionImageView.setImageResource(R.drawable.ic_cloud)
         }
         locationTextView.text = currentWeatherUi.location
-        weatherTempAndMainDescTextView.text = currentWeatherUi.mainDescription
-        humidityTextView.text = currentWeatherUi.humidity.toString() + "%"
-        pressureTextView.text = currentWeatherUi.airPressure.toString() + "hPa"
-        airSpeedTextView.text = currentWeatherUi.airSpeed.toString() + "km/h"
+        weatherTempAndMainDescTextView.text ="${currentWeatherUi.mainDescription} | ${currentWeatherUi.temperature}°C"
+        humidityTextView.text =  "${currentWeatherUi.humidity}%"
+        pressureTextView.text =  "${currentWeatherUi.airPressure}hPa"
+        airSpeedTextView.text = "${currentWeatherUi.airSpeed}km/h"
         directionTextView.text = currentWeatherUi.airDirection
         showDismissLoadingListener.dismissLoadingDialog()
         curWeatherMainLayout.visibility = ConstraintLayout.VISIBLE
