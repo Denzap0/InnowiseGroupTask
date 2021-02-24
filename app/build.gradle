@@ -14,9 +14,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-//        each {type ->
-//            type.buildConfigField 'String', "MyOpenWeatherMapApiKey" + "\"$OPENWEATHERMAP_MY_API_KEY\""
-//        }
         buildConfigField "String" , "MY_API_KEY" ,  "\"$OPENWEATHERMAP_MY_API_KEY\""
     }
 
