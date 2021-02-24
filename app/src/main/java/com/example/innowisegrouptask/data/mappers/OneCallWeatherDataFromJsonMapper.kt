@@ -2,12 +2,12 @@ package com.example.innowisegrouptask.data.mappers
 
 import com.example.innowisegrouptask.data.dataclasses.OneCallWeatherItemData
 import org.json.JSONObject
-import java.util.*
 
 class OneCallWeatherDataFromJsonMapper : (String) -> List<OneCallWeatherItemData> {
     private val windDirectionDegreesToStringMapper by lazy {
         WindDirectionDegreesToStringMapper()
     }
+
     override fun invoke(json: String): List<OneCallWeatherItemData> {
         val hoursList = mutableListOf<OneCallWeatherItemData>()
         val jsonObject = JSONObject(json)
@@ -16,9 +16,10 @@ class OneCallWeatherDataFromJsonMapper : (String) -> List<OneCallWeatherItemData
             val hourJsonObject = hourly.getJSONObject(i)
             hoursList.add(
                 OneCallWeatherItemData(
-                    coordinates = Pair(jsonObject.getDouble("lat"),jsonObject.getDouble("lon")),
+                    coordinates = Pair(jsonObject.getDouble("lat"), jsonObject.getDouble("lon")),
                     temperature = (hourJsonObject.getInt("temp") - 273.15).toInt(),
-                    mainDescription = hourJsonObject.getJSONArray("weather").getJSONObject(0).getString("main"),
+                    mainDescription = hourJsonObject.getJSONArray("weather").getJSONObject(0)
+                        .getString("main"),
                     time = hourJsonObject.getLong("dt"),
                     humidity = hourJsonObject.getInt("humidity"),
                     airPressure = hourJsonObject.getInt("pressure"),

@@ -1,22 +1,13 @@
 package com.example.innowisegrouptask.ui
 
-import android.Manifest
 import android.content.Context
-import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
-import android.media.Image
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.innowisegrouptask.R
 import com.example.innowisegrouptask.service.currentweatherfragment.TodayWeatherFragmentPresenter
@@ -34,7 +25,7 @@ class TodayWeatherFragment() : Fragment(), TodayWeatherFragmentListener {
     private lateinit var airSpeedTextView: TextView
     private lateinit var directionTextView: TextView
     private lateinit var showDismissLoadingListener: ShowDismissLoadingListener
-    private lateinit var curWeatherMainLayout : ConstraintLayout
+    private lateinit var curWeatherMainLayout: ConstraintLayout
     private val todayWeatherFragmentPresenter: TodayWeatherFragmentPresenter by lazy {
         TodayWeatherFragmentPresenterImpl(this)
     }
@@ -59,7 +50,7 @@ class TodayWeatherFragment() : Fragment(), TodayWeatherFragmentListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initViews(view)
-        if(locationCoordinates.first != null && locationCoordinates.second != null) {
+        if (locationCoordinates.first != null && locationCoordinates.second != null) {
             todayWeatherFragmentPresenter.getCurrentWeather(locationCoordinates as Pair<Double, Double>)
         }
     }
@@ -92,9 +83,10 @@ class TodayWeatherFragment() : Fragment(), TodayWeatherFragmentListener {
             "Fog" -> mainDescriptionImageView.setImageResource(R.drawable.ic_cloud)
         }
         locationTextView.text = currentWeatherUi.location
-        weatherTempAndMainDescTextView.text ="${currentWeatherUi.mainDescription} | ${currentWeatherUi.temperature}°C"
-        humidityTextView.text =  "${currentWeatherUi.humidity}%"
-        pressureTextView.text =  "${currentWeatherUi.airPressure}hPa"
+        weatherTempAndMainDescTextView.text =
+            "${currentWeatherUi.mainDescription} | ${currentWeatherUi.temperature}°C"
+        humidityTextView.text = "${currentWeatherUi.humidity}%"
+        pressureTextView.text = "${currentWeatherUi.airPressure}hPa"
         airSpeedTextView.text = "${currentWeatherUi.airSpeed}km/h"
         directionTextView.text = currentWeatherUi.airDirection
         showDismissLoadingListener.dismissLoadingDialog()

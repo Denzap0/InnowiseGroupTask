@@ -1,7 +1,5 @@
 package com.example.innowisegrouptask.ui
 
-import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.innowisegrouptask.R
 import com.example.innowisegrouptask.ui.data.OneCallWeatherUi
-import java.text.DateFormatSymbols
 import java.text.SimpleDateFormat
 import java.util.*
 
 class WeatherForecastAdapter() :
     RecyclerView.Adapter<WeatherForecastAdapter.ItemViewHolder>() {
     private val weekDaySimpleDateFormat by lazy {
-        SimpleDateFormat("EEEE",Locale.ENGLISH)
+        SimpleDateFormat("EEEE", Locale.ENGLISH)
     }
     private val weatherList = mutableListOf<OneCallWeatherUi>()
     override fun getItemViewType(position: Int): Int {
@@ -76,7 +73,7 @@ class WeatherForecastAdapter() :
             SimpleDateFormat("EEEE", Locale.ENGLISH)
         }
         private val timeSimpleDateFormat by lazy {
-            SimpleDateFormat("hh:mm",Locale.ENGLISH)
+            SimpleDateFormat("hh:mm", Locale.ENGLISH)
         }
 
         fun bind(oneCallWeatherUi: OneCallWeatherUi) {

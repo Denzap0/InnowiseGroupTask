@@ -20,7 +20,10 @@ class CurrentWeatherDataFromJsonMapper : (String) -> CurrentWeatherData {
             airPressure = jsonObject.getJSONObject("main").getInt("pressure"),
             airSpeed = windJSONObject.getInt("speed"),
             airDirection = windDirectionDegreesToStringMapper.invoke(windJSONObject.getInt("deg")),
-            coordinates = Pair(coordinatesJSONObject.getDouble("lon"),coordinatesJSONObject.getDouble("lat"))
+            coordinates = Pair(
+                coordinatesJSONObject.getDouble("lon"),
+                coordinatesJSONObject.getDouble("lat")
+            )
         )
     }
 }

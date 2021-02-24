@@ -15,30 +15,31 @@ import com.example.innowisegrouptask.ui.data.OneCallWeatherUi
 import com.example.innowisegrouptask.ui.listeners.ForecastFragmentListener
 import com.example.innowisegrouptask.ui.listeners.ShowDismissLoadingListener
 
-class ForecastFragment() : Fragment(),ForecastFragmentListener {
+class ForecastFragment() : Fragment(), ForecastFragmentListener {
     private lateinit var recyclerView: RecyclerView
     private val weatherAdapter: WeatherForecastAdapter = WeatherForecastAdapter()
-    private val forecastFragmentPresenter : ForecastFragmentPresenter by lazy {
+    private val forecastFragmentPresenter: ForecastFragmentPresenter by lazy {
         ForecastFragmentPresenterImpl(this)
     }
     private lateinit var showDismissLoadingListener: ShowDismissLoadingListener
-    private lateinit var coordinatesPair : Pair<Double?,Double?>
+    private lateinit var coordinatesPair: Pair<Double?, Double?>
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if(context is ShowDismissLoadingListener){
+        if (context is ShowDismissLoadingListener) {
             showDismissLoadingListener = context
         }
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if(arguments != null){
-            coordinatesPair = Pair(arguments?.getDouble("lat"),arguments?.getDouble("lon"))
+        if (arguments != null) {
+            coordinatesPair = Pair(arguments?.getDouble("lat"), arguments?.getDouble("lon"))
         }
-        return inflater.inflate(R.layout.forecast_fragment,container,false)
+        return inflater.inflate(R.layout.forecast_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,11 +48,12 @@ class ForecastFragment() : Fragment(),ForecastFragmentListener {
         forecastFragmentPresenter.fetchWeatherList(coordinatesPair as Pair<Double, Double>)
     }
 
-    private fun initRecyclerView(view: View){
-        if(this.context != null){
+    private fun initRecyclerView(view: View) {
+        if (this.context != null) {
             recyclerView = view.findViewById(R.id.recyclerView)
             recyclerView.adapter = weatherAdapter
-            recyclerView.layoutManager = LinearLayoutManager(this.context,RecyclerView.VERTICAL,false)
+            recyclerView.layoutManager =
+                LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
         }
 
     }

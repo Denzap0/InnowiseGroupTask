@@ -9,10 +9,10 @@ import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 
 class OneCallAPIImpl : OneCallAPI {
-    private val okHttpClient by lazy{
+    private val okHttpClient by lazy {
         OkHttpClient()
     }
-    private val requestFactory : OneCallRequestFactory by lazy {
+    private val requestFactory: OneCallRequestFactory by lazy {
         OneCallRequestFactoryImpl()
     }
 
@@ -22,21 +22,22 @@ class OneCallAPIImpl : OneCallAPI {
     private val oneCallWeatherPresenterMapper by lazy {
         OneCallWeatherPresenterMapper()
     }
+
     override fun getOneCallWeather(coordPair: Pair<Double, Double>): Single<List<OneCallWeatherPresenter>> {
         val request = requestFactory.getOneCallRequest(coordPair)
         return Single.create<String> { emitter ->
             val response = okHttpClient.newCall(request).execute()
-            if(response.isSuccessful){
-                if (response.body != null){
+            if (response.isSuccessful) {
+                if (response.body != null) {
                     emitter.onSuccess((response.body as ResponseBody).string())
-                }else{
+                } else {
                     emitter.onError(Throwable("EMPTY ONE CALL WEATHER RESPONSE BODY"))
                 }
-            }else{
+            } else {
                 emitter.onError(Throwable("ONE CALL API ERROR"))
             }
         }.map { json -> oneCallWeatherDataFromJsonMapper.invoke(json) }
-            .map {data ->  oneCallWeatherPresenterMapper.invoke(data) }
+            .map { data -> oneCallWeatherPresenterMapper.invoke(data) }
             .subscribeOn(Schedulers.io())
     }
 }
